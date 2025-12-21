@@ -7,13 +7,10 @@ set -e
 echo "Starting EC2 instance setup..."
 
 # Update system packages
-sudo yum update -y
+sudo apt update -y
 
 # Install web server (Apache HTTP Server)
-sudo yum install -y httpd
-
-# Install PHP (optional, remove if not needed)
-sudo yum install -y php
+sudo apt install -y httpd
 
 # Enable Apache to start on boot
 sudo systemctl enable httpd
