@@ -68,17 +68,3 @@ resource "aws_db_instance" "main" {
     Name = "${var.project_name}-mysql-db"
   }
 }
-
-# RDS Read Replica for scalability (optional)
-resource "aws_db_instance" "read_replica" {
-  count                    = var.enable_read_replica ? 1 : 0
-  identifier               = "${var.project_name}-db-read-replica"
-  replicate_source_db      = aws_db_instance.main.identifier
-  instance_class           = var.db_instance_class
-  publicly_accessible      = false
-  auto_minor_version_upgrade = true
-  
-  tags = {
-    Name = "${var.project_name}-db-read-replica"
-  }
-}
