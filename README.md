@@ -2,8 +2,7 @@
 
 ## Overview
 
-A highly available AWS network architecture with multi-AZ VPC, ALB, Auto Scaling, Bastion Host, Security Groups, NACLs, and CloudWatch monitoring.
-
+A highly available 3-tier AWS architecture with VPC, ALB, Auto Scaling, RDS database, and CloudWatch monitoring across multiple Availability Zones.
 This project demonstrates how to build secure and scalable cloud infrastructure using Terraform.
 
 ## Architecture
@@ -12,6 +11,7 @@ This project demonstrates how to build secure and scalable cloud infrastructure 
 - **Subnets**: Public and private subnets for high availability
 - **ALB**: Application Load Balancer for traffic distribution
 - **EC2**: Auto Scaling Group for scalable web servers
+- - **RDS Database**: Multi-AZ MySQL database for data persistence
 - **Bastion Host**: Secure SSH access to private instances
 - **Security**: Security Groups and NACLs for least-privilege access
 - **Monitoring**: CloudWatch logs and metrics for observability
@@ -27,7 +27,7 @@ This project demonstrates how to build secure and scalable cloud infrastructure 
 
 ## Technologies Used
 
-- **AWS**: VPC, EC2, ALB, Auto Scaling, Security Groups, NACLs, CloudWatch
+- **AWS**: VPC, EC2, ALB, Auto Scaling, Security Groups, NACLs, CloudWatch, RDS
 - **IaC**: Terraform for reproducible infrastructure
 - **Networking**: Multi-AZ, subnets, routing, gateways
 
