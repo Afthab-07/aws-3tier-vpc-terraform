@@ -10,14 +10,6 @@ EC2 instances automatically send the following metrics to CloudWatch:
 - Disk Read/Write (if monitoring agent installed)
 - Status Checks (System and Instance)
 
-### CloudWatch Agent (Optional)
-
-For detailed monitoring, install the CloudWatch Agent:
-1. Systems Manager → Fleet Manager
-2. Select instances
-3. Install CloudWatch Agent
-4. Configure agent to collect memory, disk, and custom metrics
-
 ## Creating CloudWatch Dashboards
 
 ### Dashboard Setup
