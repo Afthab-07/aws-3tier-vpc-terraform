@@ -1,109 +1,59 @@
-# AWS VPC Project - Version 1 & Version 2
+# AWS VPC Infrastructure
 
 ## Overview
 
-This project shows how I learned to build AWS cloud systems step by step:
-- **Version 1**: Basic network setup with load balancer and web servers
-- **Version 2**: Improved version with cost-saving Spot instances and Auto Scaling
+A highly available AWS network architecture with multi-AZ VPC, ALB, Auto Scaling, Bastion Host, Security Groups, NACLs, and CloudWatch monitoring.
 
-## Version 1: Simple AWS Setup
+This project demonstrates how to build secure and scalable cloud infrastructure using Terraform.
 
-### What I Built
+## Architecture
 
-A simple website that runs on 2 servers in AWS behind a load balancer.
+- **VPC**: Network container across 2 Availability Zones
+- **Subnets**: Public and private subnets for high availability
+- **ALB**: Application Load Balancer for traffic distribution
+- **EC2**: Auto Scaling Group for scalable web servers
+- **Bastion Host**: Secure SSH access to private instances
+- **Security**: Security Groups and NACLs for least-privilege access
+- **Monitoring**: CloudWatch logs and metrics for observability
 
-### AWS Services Used
-- **VPC**: Network container for everything
-- **Subnets**: 2 public subnets in different areas (high availability)
-- **Internet Gateway**: Lets internet traffic in and out
-- **ALB (Load Balancer)**: Splits traffic between servers
-- **EC2**: Web servers running the website
-- **Security Groups**: Firewall rules for servers
-- **CloudWatch**: Monitor server health
+## Features
 
-### How to Run Version 1
+✓ Multi-AZ high availability
+✓ Auto Scaling for dynamic load handling
+✓ Secure network architecture with private subnets
+✓ Bastion host for controlled server access
+✓ Real-time monitoring with CloudWatch
+✓ Infrastructure as Code using Terraform
 
-```bash
-cd terraform/v1
-terraform init
-terraform plan
-terraform apply
-```
+## Technologies Used
 
-Then visit the ALB URL in EC2 console to see your website.
+- **AWS**: VPC, EC2, ALB, Auto Scaling, Security Groups, NACLs, CloudWatch
+- **IaC**: Terraform for reproducible infrastructure
+- **Networking**: Multi-AZ, subnets, routing, gateways
 
-### Architecture Diagram
-
-```
-Internet
-   |
-   v
-Internet Gateway
-   |
-   v
-Load Balancer
-   |
-   +----+----+
-   |         |
-   v         v
- Server1   Server2
- (EC2)     (EC2)
-```
-
----
-
-## Version 2: Cost Saving with Spot Instances
-
-### What I Improved
-
-Replaced normal servers with 70% cheap Spot instances + 30% normal instances.
-
-### Why?
-
-- Spot instances are **70% cheaper** than normal ones
-- AWS can take them back with 2 minutes notice
-- We keep 30% normal servers so website stays up
-- Auto Scaling replaces broken servers automatically
-
-### New Concepts
-
-- **Spot Instances**: Cheap unused servers
-- **Auto Scaling Group**: Automatically creates/deletes servers
-- **Mixed Instances Policy**: Mix of cheap + reliable servers
-- **Health Checks**: Makes sure servers are healthy
-
-### How to Run Version 2
-
-```bash
-cd terraform/v2
-terraform init
-terraform plan
-terraform apply
-```
-
-Watch EC2 console - you'll see servers marked as "Spot" (cheap ones).
-
-### Cost Savings
-
-- Version 1: $0.07 per hour per server = $1.68 per day
-- Version 2: 70% Spot + 30% normal = **$0.60 per day** (64% savings!)
-
----
-
-## Folder Structure
+## Directory Structure
 
 ```
-aws-highly-available-vpc-architecture/
-├── terraform/
-│   ├── v1/                    # Version 1 - Basic setup
-│   │   ├── main.tf
-│   │   ├── variables.tf
-│   │   └── outputs.tf
-│   └── v2/                    # Version 2 - Spot + Auto Scaling
-│       ├── main.tf
-│       ├── variables.tf
-│       └── outputs.tf
+├── architecture/
+│   └── architecture-description.md
 ├── scripts/
-│   └── user-data.sh          # Website setup script
-└── README.md                  # This file
+│   └── user-data.sh
+├── setup-guides/
+│   └── monitoring-cloudwatch.md
+└── README.md
 ```
+
+## Getting Started
+
+1. Configure AWS credentials
+2. Update Terraform variables
+3. Run `terraform init` and `terraform apply`
+4. Access the load balancer DNS for your web application
+
+## Key Learnings
+
+- Building secure VPC architecture
+- Implementing high availability across AZs
+- Using Auto Scaling for reliability
+- Monitoring infrastructure with CloudWatch
+- Writing reusable Terraform code
