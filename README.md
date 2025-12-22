@@ -50,10 +50,3 @@ This project demonstrates how to build secure and scalable cloud infrastructure 
 3. Run `terraform init` and `terraform apply`
 4. Access the load balancer DNS for your web application
 
-## Key Learnings
-
-- Building secure VPC architecture
-- Implementing high availability across AZs
-- Using Auto Scaling for reliability
-- Monitoring infrastructure with CloudWatch
-- Writing reusable Terraform code
