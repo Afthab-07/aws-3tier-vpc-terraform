@@ -1,5 +1,6 @@
 # AWS VPC Project 
 # Basic infrastructure with load balancer and web servers
+# This creates a 3-tier architecture: Web tier (ALB + EC2), Database tier (RDS), Network tier (VPC)
 
 provider "aws" {
   region = var.aws_region
@@ -169,6 +170,8 @@ resource "aws_lb_listener" "web" {
 }
 
 # EC2 Instances (2 web servers)
+# Web Servers - Learning: EC2 instances host our application
+# Using count to create 2 servers in different availability zones for high availability
 resource "aws_instance" "web" {
   count           = 2
   ami             = data.aws_ami.amazon_linux.id
@@ -176,9 +179,10 @@ resource "aws_instance" "web" {
   subnet_id       = aws_subnet.public[count.index].id
   security_groups = [aws_security_group.web.id]
 
-  user_data = base64encode(templatefile("${path.module}/user-data.sh", {
+    user_data       = base64encode(templatefile("${path.root}/../../scripts/user-data.sh", {
     project_name = var.project_name
   }))
+  # user_data script installs Apache web server when instance launches
 
   tags = {
     Name = "${var.project_name}-web-server-${count.index + 1}"
@@ -186,6 +190,7 @@ resource "aws_instance" "web" {
 }
 
 # Register instances with target group
+# Learning: This connects EC2 instances to the ALB target group for load distribution
 resource "aws_lb_target_group_attachment" "web" {
   count            = 2
   target_group_arn = aws_lb_target_group.web.arn
